@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Hiro</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/hiro.css">
+    <style>
+        #line {
+            /*            float: left;*/
+            height: 150px;
+            background-color: white;
+            position: relative;
+            /*            top: 3%;*/
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="main-body">
+        <div class="dokme" id="baz"></div>
+        <div class="menu col-md-2">
+            <div class="logo col-md-12">
+            </div>
+            <ul class="menu-bar">
+                <li><span class="icon-stats-bars2"></span>
+                    Dashboard</li>
+                <li><span class="icon-podcast"></span>
+                    Receiver Status</li>
+                <li><span class="icon-feed"></span>
+                    Satellites</li>
+                <li><span class="icon-tree"></span>
+                    Network Configuration</li>
+                <li><span class="icon-cogs"></span>
+                    Receiver Configuration</li>
+                <li><span class="icon-loop"></span>
+                    I/O Configuration</li>
+                <li><span class="icon-lock"></span>
+                    Security</li>
+            </ul>
+            <span class="icon-circle-left" id="baste"></span>
+        </div>
+        <div class="filter col-md-10">
+            <div class="filter-cadr col-md-2">
+                <span class="icon-filter">
+                </span>
+                <i>Filters</i>
+                <span class="ctrl icon-ctrl"></span>
+            </div>
+            <div class="dashboard col-md-6">
+                <p>Dashboard</p>
+            </div>
+            <div class="time col-md-4">
+                <div id="demo" class="col-md-7">
+
+                </div>
+                <div class="user-panel col-md-5">
+                    <span class="user icon-user"></span>
+                </div>
+            </div>
+        </div>
+        <div class="main col-md-10">
+            <div class="tracked col-md-12">
+                <div class="box col-md-3">
+                    <div class="box-child">
+                        <p>Tracked Satellites</p>
+                        <div class="line col-md-12">
+                            <span class="icon-feed col-sm-4"></span>
+                            <p class="col-sm-4">22</p>
+                            <div class="col-sm-4 afzayesh-parent">
+                                <div class="afzayesh"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box col-md-3">
+                    <div class="box-child">
+                        <p>Target Server</p>
+                        <div class="line col-md-12">
+                            <span class="icon-database col-sm-3"></span>
+                            <div class="ip col-sm-9">
+                                <p>45.252.144.14</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box col-md-3">
+                    <div class="box-child">
+
+                    </div>
+                </div>
+                <div class="box col-md-3">
+                    <div class="box-child">
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="nemodar col-sm-11" id="line">
+
+            </div>
+            <div class="mahvare col-md-12">
+                <div class="mahvare-1 col-md-6">
+                    <div class="keshvar">
+                        <p>Satellites Tracked / Acquired</p>
+                        <div class="keshvar-item col-md-12">
+                            <div class="img-keshvar gps"></div>
+                            <span class="gps-ragham">7</span>
+                            <div class="load col-md-12">
+                                <div class="load-1"></div>
+                            </div>
+                        </div>
+                        <div class="keshvar-item col-md-12">
+                            <div class="img-keshvar glonass"></div>
+                            <span class="glonass-ragham">9</span>
+                            <div class="load col-md-12">
+                                <div class="load-2"></div>
+                            </div>
+                        </div>
+                        <div class="keshvar-item col-md-12">
+                            <div class="img-keshvar galileo"></div>
+                            <span class="galileo-ragham">2</span>
+                            <div class="load col-md-12">
+                                <div class="load-3"></div>
+                            </div>
+                        </div>
+                        <div class="keshvar-item col-md-12">
+                            <div class="img-keshvar beidou"></div>
+                            <span class="beidou-ragham">1</span>
+                            <div class="load col-md-12">
+                                <div class="load-4"></div>
+                            </div>
+                        </div>
+                        <div class="keshvar-item col-md-12">
+                            <div class="img-keshvar sbas"></div>
+                            <span class="sbas-ragham">3</span>
+                            <div class="load col-md-12">
+                                <div class="load-5"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mahvare-2 col-md-6">
+                    <div class="madar-dayere">
+                        <div class="rect col-md-12">
+                            <div id="chart" style='width: 400px; height: 400px; padding-left: 5px; padding-bottom: 5px;'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/raphael/raphael.min.js"></script>
+    <script src="js/morris/morris.min.js"></script>
+    <!--    <script src="https://d3js.org/d3.v3.min.js"></script>-->
+    <script>
+        $(function() {
+            $(".menu-bar li").click(function() {
+                $(this).css("font-family", "fantasy");
+                $(this).css("box-shadow", "1px 1px 2px 2px black");
+                $(this).siblings().css("box-shadow", "0px 0px 0px 0px black");
+                $(this).siblings().css("font-family", "serif");
+            })
+        })
+        $("#baste").click(function() {
+            //            $(".menu").css("position" , "absolute");
+            $(".filter").addClass("col-md-12");
+            $(".menu").css("display", "none");
+            $(".main").addClass("col-md-12");
+            $(".main").css("left", "0");
+            $(".dokme").css("display", "block");
+        })
+        $("#baz").click(function() {
+            $(this).css("display", "none");
+            $(".filter").removeClass("col-md-12");
+            $(".menu").css("display", "block");
+            $(".main").removeClass("col-md-12");
+            $(".main").css("left", "16%");
+        })
+        new Morris.Line({
+            element: 'line',
+            data: [{
+                    x: '2013',
+                    a: 100,
+                    b: 90
+                },
+                {
+                    x: '2014',
+                    a: 75,
+                    b: 65
+                },
+                {
+                    x: '2015',
+                    a: 30,
+                    b: 40
+                },
+                {
+                    x: '2016',
+                    a: 75,
+                    b: 65
+                },
+                {
+                    x: '2017',
+                    a: 50,
+                    b: 40
+                },
+                {
+                    x: '2018',
+                    a: 75,
+                    b: 40
+                },
+                {
+                    x: '2019',
+                    a: 100,
+                    b: 90
+                }
+            ],
+            xkey: 'x',
+            ykeys: ['a', 'b'],
+            labels: ['Series A', 'Series B']
+        });
+        var d = new Date();
+        document.getElementById("demo").innerHTML = d.toUTCString();
+        var deg2rad = Math.PI / 180;
+        var width = 400,
+            height = 350,
+            radius = Math.min(width, height) / 2 - 30;
+
+        var svg = d3.select("#chart").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+        var r = d3.scale.linear()
+            .domain([90, 0])
+            .range([0, radius]);
+
+        var line = d3.svg.line.radial()
+            .radius(function(d) {
+                return r(d[1]);
+            })
+            .angle(function(d) {
+                return -d[0] + Math.PI / 2;
+            });
+
+        var gr = null;
+
+        createSkyplot();
+
+        var json = {
+            "type": "GSV",
+            "inView": [{
+                    "data": [1, 45, 90]
+                },
+                {
+                    "data": [3, 70, 225]
+                }
+            ]
+        };
+
+        updateSkyPlot(json);
+
+        function createSkyplot() {
+            //////////////////////			  
+            gr = svg.append("g")
+                .attr("class", "r axis")
+                .selectAll("g")
+                .data(r.ticks(5))
+                .enter().append("g");
+
+            gr.append("circle").attr("r", r).style('fill', 'white');
+
+            gr.append("text")
+                .attr("y", function(d) {
+                    return -r(d) - 4;
+                })
+                .attr("transform", "rotate(20)")
+                .style("text-anchor", "middle")
+                .style('fill', 'blue')
+                .text(function(d) {
+                    return d;
+                });
+            /////////////////////
+
+            /////////////////////
+            var ga = svg.append("g")
+                .attr("class", "a axis")
+                .selectAll("g")
+                .data(d3.range(0, 360, 45))
+                .enter().append("g")
+                .attr("transform", function(d) {
+                    return "rotate(" + (d - 90) + ")";
+                });
+
+            ga.append("line").attr("x2", radius).style('stroke', 'black').style('stroke-dasharray', '1,8');
+
+            ga.append("text")
+                .attr("x", radius + 6)
+                .attr("dy", ".35em")
+                .style("text-anchor", function(d) {
+                    return d < 360 && d > 90 ? "end" : null;
+                })
+                .attr("transform", function(d) {
+                    return d < 360 && d > 90 ? "rotate(180 " + (radius + 3) + ",0)" : null;
+                })
+                .text(function(d) {
+                    return d + "°";
+                });
+            /////////////////////
+        }
+
+        function updateSkyPlot(d) {
+            var pos = [];
+            var inview = d.inView;
+
+            for (var elem in inview) {
+                if (inview.hasOwnProperty(elem)) {
+                    // the azimuth should be in radians and substracted from (Math.PI/2)
+                    var d = [(Math.PI / 2) - inview[elem].data[2] * deg2rad, inview[elem].data[1]];
+                    pos.push(d);
+                }
+            }
+
+            var r = d3.scale.linear()
+                .domain([90, 0])
+                .range([0, radius]);
+
+            var line = d3.svg.line.radial()
+                .radius(function(d) {
+                    return r(d[1]);
+                })
+                .angle(function(d) {
+                    return -d[0] + Math.PI / 2;
+                });
+
+            var color = d3.scale.category20();
+
+            svg.selectAll('circle').remove();
+
+            gr.append("circle").attr("r", r).style('fill', 'white');
+
+            svg.selectAll("point").data(pos).enter().append("circle").attr("class", "point")
+                .attr("transform", function(d) {
+                    var coors = line([d]).slice(1).slice(0, -1);
+                    return "translate(" + coors + ")"
+                })
+                .attr("r", 8)
+                .attr("fill", function(d, i) {
+                    return color(i);
+                });
+
+        }
+    </script>
+</body></html>
