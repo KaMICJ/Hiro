@@ -6,6 +6,8 @@
     <title>Hiro</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/hiro.css">
+    <link rel="stylesheet" href="css/acme.css">
+    <link rel="stylesheet" href="css/addClass.css">
     <style>
         #line {
             /*            float: left;*/
@@ -26,19 +28,26 @@
             </div>
             <ul class="menu-bar">
                 <li><span class="icon-stats-bars2"></span>
-                    <p>Dashboard</p></li>
+                    <p class="menu-txt">Dashboard</p>
+                </li>
                 <li><span class="icon-podcast"></span>
-                    <p>Receiver Status</p></li>
+                    <p class="menu-txt">Receiver Status</p>
+                </li>
                 <li><span class="icon-feed"></span>
-                    <p>Satellites</p></li>
+                    <p class="menu-txt">Satellites</p>
+                </li>
                 <li><span class="icon-tree"></span>
-                    <p>Network Configuration</p></li>
+                    <p class="menu-txt">Network Configuration</p>
+                </li>
                 <li><span class="icon-cogs"></span>
-                    <p>Receiver Configuration</p></li>
+                    <p class="menu-txt">Receiver Configuration</p>
+                </li>
                 <li><span class="icon-loop"></span>
-                    <p>I/O Configuration</p></li>
+                    <p class="menu-txt">I/O Configuration</p>
+                </li>
                 <li><span class="icon-lock"></span>
-                    <p>Security</p></li>
+                    <p class="menu-txt">Security</p>
+                </li>
             </ul>
             <span class="icon-circle-left" id="baste"></span>
         </div>
@@ -61,7 +70,7 @@
                 </div>
             </div>
         </div>
-        <div class="main col-md-10">
+        <div class="main col-md-10 left-Class-16">
             <div class="tracked col-md-12">
                 <div class="box col-md-3">
                     <div class="box-child">
@@ -152,19 +161,41 @@
             </div>
         </div>
     </div>
-
+    <script src="https://d3js.org/d3.v3.min.js"></script>
     <script src="js/jquery/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/raphael/raphael.min.js"></script>
     <script src="js/morris/morris.min.js"></script>
-        <script src="https://d3js.org/d3.v3.min.js"></script>
     <script>
-        window.addEventListener("resize" ,()=>{
+        window.addEventListener("resize", () => {
             var x = window.outerWidth;
-            if(x<=767){
-                document.querySelector(".menu").style.width = "0";
-        }
+            if (x <= 569) {
+                document.qu
+            }
         })
+        window.addEventListener("resize", () => {
+            var x = window.outerWidth;
+            if (x <= 773) {
+                document.querySelector(".menu-txt").classList.add("display-block");
+                document.querySelector(".menu-txt").classList.remove("display-none");
+                document.getElementById("baz").style.display = "none";
+                document.getElementById("baste").style.display = "none";
+                document.querySelector(".filter").classList.remove("col-md-11");
+                document.querySelector(".menu").classList.remove("col-md-1");
+                document.querySelector(".menu").classList.add("col-md-2");
+                document.querySelector(".main").classList.remove("left-Class-16");
+                document.querySelector(".main").classList.remove("left-Class-8");
+            }
+        })
+        window.addEventListener("resize", () => {
+            var x = window.outerWidth;
+            if (x > 773) {
+                document.querySelector(".main").classList.add("left-Class-16");
+                document.getElementById("baste").style.display = "block";
+                //                document.querySelector(".main").classList.add("left-Class-8");
+            }
+        })
+
         $(function() {
             $(".menu-bar li").click(function() {
                 $(this).css("font-family", "fantasy");
@@ -174,34 +205,30 @@
             })
         })
         $("#baste").click(function() {
-//                        $(".menu").css("position" , "absolute");
-//            $(".filter").addClass("col-md-11");
-//            $()
-            $(".menu").css("width" , "5%");
-            $(".main").css("left", "70px");
-            $(".filter").css("width" , "94.666667%");
-            $(".filter").removeClass("col-md-10");
+            //            $(".menu").css("position" , "absolute");
+            $(this).css("display", "none");
+            $(".filter").addClass("col-md-11");
+            //            $(".menu").css("display" , "none");
             $(".menu").removeClass("col-md-2");
-//            $(".menu").addClass("col-md-1");
-            $(".main").removeClass("col-md-10");
+            $(".menu").addClass("col-md-1");
             $(".main").addClass("col-md-11");
-            $(".main").css("width" , "94.666667%");
+            $(".main").addClass("left-Class-8");
             $(".dokme").css("display", "block");
-            $("li span").css("font-size" , "22px");
-            $(".menu-bar p").css("display" , "none");
-            $(".menu-bar li").css("margin" , "0");
+            $(".menu-txt").addClass("display-none");
+            $(".menu-txt").removeClass("display-block");
         })
         $("#baz").click(function() {
             $(this).css("display", "none");
-            $(".filter").addClass("col-md-10");
-//            $(".menu").css("display", "block");
+            $(".filter").removeClass("col-md-11");
+            //            $(".menu").css("display" , "block");
+            $(".menu").removeClass("col-md-1");
             $(".menu").addClass("col-md-2");
-            $(".menu").css("width" , "16.666667%");
             $(".main").removeClass("col-md-11");
-            $(".main").addClass("col-md-10");
-            $(".main").css("left", "16%");
-            $("li span").css("font-size" , "0.9em");
-            $(".menu-bar p").css("display" , "inline-block");
+            $(".main").removeClass("left-Class-8");
+            //            $(".main").removeClass("left-Class-0");
+            $("#baste").css("display", "block");
+            $(".menu-txt").removeClass("display-none");
+            $(".menu-txt").addClass("display-block");
         })
         new Morris.Line({
             element: 'line',
@@ -247,104 +274,135 @@
         });
         var d = new Date();
         document.getElementById("demo").innerHTML = d.toUTCString();
-        var deg2rad = Math.PI/180;
-            var width = 400, height = 350, radius = Math.min(width, height) / 2 - 30;
+        var deg2rad = Math.PI / 180;
+        var width = 400,
+            height = 350,
+            radius = Math.min(width, height) / 2 - 30;
 
-            var svg = d3.select("#chart").append("svg")
-			    .attr("width", width)
-			    .attr("height", height)
-			    .append("g")
-			    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-				  
-            var r = d3.scale.linear()
-			    .domain([90, 0])
-			    .range([0, radius]);
-  
-           var line = d3.svg.line.radial()
-			    .radius(function(d) {return r(d[1]);})
-			    .angle(function(d) {return -d[0] + Math.PI / 2;});
+        var svg = d3.select("#chart").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-            var gr = null;
+        var r = d3.scale.linear()
+            .domain([90, 0])
+            .range([0, radius]);
 
-            createSkyplot();
+        var line = d3.svg.line.radial()
+            .radius(function(d) {
+                return r(d[1]);
+            })
+            .angle(function(d) {
+                return -d[0] + Math.PI / 2;
+            });
 
-			var json = {"type" : "GSV",
-                        "inView" : [{"data" : [1, 45, 90]},
-                                    {"data" : [3, 70, 225]}]
-                       };
-                       
-            updateSkyPlot(json);
+        var gr = null;
 
-            function createSkyplot(){	
-	            //////////////////////			  
-	            gr = svg.append("g")
-				    .attr("class", "r axis")
-				    .selectAll("g")
-				    .data(r.ticks(5))
-				    .enter().append("g");
+        createSkyplot();
 
-                gr.append("circle").attr("r", r).style('fill', 'white');
+        var json = {
+            "type": "GSV",
+            "inView": [{
+                    "data": [1, 45, 90]
+                },
+                {
+                    "data": [3, 70, 225]
+                }
+            ]
+        };
 
-	            gr.append("text")
-		            .attr("y", function(d) { return -r(d) - 4; })
-		            .attr("transform", "rotate(20)")
-		            .style("text-anchor", "middle")
-		            .style('fill', 'blue')
-    	            .text(function(d) { return d;});
-	            /////////////////////
+        updateSkyPlot(json);
 
-	            /////////////////////
-	            var ga = svg.append("g")
-				    .attr("class", "a axis")
-				    .selectAll("g")
-				    .data(d3.range(0, 360, 45))
-				    .enter().append("g")
-      			    .attr("transform", function(d) {return "rotate(" + (d - 90) + ")";});
+        function createSkyplot() {
+            //////////////////////			  
+            gr = svg.append("g")
+                .attr("class", "r axis")
+                .selectAll("g")
+                .data(r.ticks(5))
+                .enter().append("g");
 
-                ga.append("line").attr("x2", radius).style('stroke', 'black').style('stroke-dasharray', '1,8');
-	  
-	            ga.append("text")
-    	            .attr("x", radius + 6)
-    	            .attr("dy", ".35em")
-    	            .style("text-anchor", function(d) { return d < 360 && d > 90 ? "end" : null; })
-		            .attr("transform", function(d) { return d < 360 && d > 90 ? "rotate(180 " + (radius + 3) + ",0)" : null; })
-    	            .text(function(d) { return d + "°"; });
-	            /////////////////////
+            gr.append("circle").attr("r", r).style('fill', 'white');
+
+            gr.append("text")
+                .attr("y", function(d) {
+                    return -r(d) - 4;
+                })
+                .attr("transform", "rotate(20)")
+                .style("text-anchor", "middle")
+                .style('fill', 'blue')
+                .text(function(d) {
+                    return d;
+                });
+            /////////////////////
+
+            /////////////////////
+            var ga = svg.append("g")
+                .attr("class", "a axis")
+                .selectAll("g")
+                .data(d3.range(0, 360, 45))
+                .enter().append("g")
+                .attr("transform", function(d) {
+                    return "rotate(" + (d - 90) + ")";
+                });
+
+            ga.append("line").attr("x2", radius).style('stroke', 'black').style('stroke-dasharray', '1,8');
+
+            ga.append("text")
+                .attr("x", radius + 6)
+                .attr("dy", ".35em")
+                .style("text-anchor", function(d) {
+                    return d < 360 && d > 90 ? "end" : null;
+                })
+                .attr("transform", function(d) {
+                    return d < 360 && d > 90 ? "rotate(180 " + (radius + 3) + ",0)" : null;
+                })
+                .text(function(d) {
+                    return d + "°";
+                });
+            /////////////////////
+        }
+
+        function updateSkyPlot(d) {
+            var pos = [];
+            var inview = d.inView;
+
+            for (var elem in inview) {
+                if (inview.hasOwnProperty(elem)) {
+                    // the azimuth should be in radians and substracted from (Math.PI/2)
+                    var d = [(Math.PI / 2) - inview[elem].data[2] * deg2rad, inview[elem].data[1]];
+                    pos.push(d);
+                }
             }
 
-function updateSkyPlot(d){
-	var pos = [];
-	var inview = d.inView;
+            var r = d3.scale.linear()
+                .domain([90, 0])
+                .range([0, radius]);
 
-	for (var elem in inview){
-		if (inview.hasOwnProperty(elem)) {
-			// the azimuth should be in radians and substracted from (Math.PI/2)
-			var d = [(Math.PI/2) - inview[elem].data[2]*deg2rad, inview[elem].data[1]]; 
-			pos.push(d);
-		}
-	}
+            var line = d3.svg.line.radial()
+                .radius(function(d) {
+                    return r(d[1]);
+                })
+                .angle(function(d) {
+                    return -d[0] + Math.PI / 2;
+                });
 
-	var r = d3.scale.linear()
-		.domain([90, 0])
-		.range([0, radius]);
+            var color = d3.scale.category20();
 
-	var line = d3.svg.line.radial()
-		.radius(function(d) {return r(d[1]);})
-		.angle(function(d) {return -d[0] + Math.PI / 2;});
+            svg.selectAll('circle').remove();
 
-	var color = d3.scale.category20();
+            gr.append("circle").attr("r", r).style('fill', 'white');
 
-	svg.selectAll('circle').remove();
+            svg.selectAll("point").data(pos).enter().append("circle").attr("class", "point")
+                .attr("transform", function(d) {
+                    var coors = line([d]).slice(1).slice(0, -1);
+                    return "translate(" + coors + ")"
+                })
+                .attr("r", 8)
+                .attr("fill", function(d, i) {
+                    return color(i);
+                });
 
-	gr.append("circle").attr("r", r).style('fill', 'white');
-
-    svg.selectAll("point").data(pos).enter().append("circle").attr("class", "point")
-      	.attr("transform", function(d) {
-        		var coors = line([d]).slice(1).slice(0, -1);
-        		return "translate(" + coors + ")"})
-      	.attr("r", 8)
-		.attr("fill",function(d,i){return color(i);});
-		
-}
+        }
     </script>
 </body></html>

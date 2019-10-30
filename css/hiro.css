@@ -313,7 +313,11 @@ span:hover {
     border-bottom-color: green;
     float: left;
 }
-
+.menu-bar>li>p{
+/*    float: left;*/
+    display: inline-block;
+    margin: 0;
+}
 .afzayesh-parent {
     height: 70px;
     text-align: center;
